@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Python/FastAPI app deployment to AWS Lambda
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: python3.11
+    MemorySize: 512
+    Environment:
+      Variables:
+        MONGODB_URI: "mongodb+srv://admin:WQpcIozzTez78SB7@cluster0.ajgnk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+        MONGODB_DB: "dogs_db"
+
+Resources:
+  FastApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: fastapi-beanie-app
+      Handler: app.main.handler
+      CodeUri: .
+      Events:
+        ApiRoot:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+      Policies:
+        - AWSLambdaBasicExecutionRole
+
+Outputs:
+  ApiUrl:
+    Description: "API Gateway endpoint URL:"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
