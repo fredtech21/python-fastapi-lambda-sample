@@ -7,15 +7,6 @@ DOG_DATA = {
     "date_of_birth": date.today().isoformat()
 }
 
-def add(a: int, b: str) -> int:
-    return a + int(b)
-
-@pytest.mark.asyncio
-async def test_addtoto():
-    r = add(2, "4")
-    print("result ------", r)
-    assert r == 6
-
 @pytest.mark.asyncio
 async def test_create_dog(async_client):
     response = await async_client.post("/dogs", json=DOG_DATA)

@@ -1,6 +1,6 @@
-# python-fastapi-example
+# python-fastapi-lambda-sample
 
-Small FastAPI example
+FastAPI example to deploy a small CRUD REST service in AWS Lambda. Data is stored in MongoDB using Beanie.
 
 ## Automatic tests
 
@@ -22,9 +22,9 @@ Tests:
 ```
 curl http://localhost:8000/dogs
 curl -X POST http://localhost:8000/dogs -d '{"name":"medor", "race":"golden retriever", "date_of_birth": "2022-11-11"}' -H "Content-Type: application/json"
-curl http://localhost:8000/dogs/6846a7eee28f6a63a4b7efe9
-curl -X PUT http://localhost:8000/dogs/6846a7eee28f6a63a4b7efe9 -d '{"name":"Nelly", "race":"golden retriever", "date_of_birth": "2023-01-21"}' -H "Content-Type: application/json"
-curl -X DELETE http://localhost:8000/dogs/6846a7eee28f6a63a4b7efe9
+curl http://localhost:8000/dogs/<id>
+curl -X PUT http://localhost:8000/dogs/<id> -d '{"name":"Nelly", "race":"golden retriever", "date_of_birth": "2023-01-21"}' -H "Content-Type: application/json"
+curl -X DELETE http://localhost:8000/dogs/<id>
 ```
 
 ## Serverless with AWS Lambda
